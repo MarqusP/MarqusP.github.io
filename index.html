@@ -3,493 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKPI Spring Rush — Business Card</title>
+<title>Marqus Kaito Pilapil — AKPI Spring Rush</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --gold: #C9A84C;
-    --navy: #1a2444;
-    --cream: #faf8f3;
-  }
-
   body {
     font-family: 'DM Sans', sans-serif;
-    background: #f0ede6;
+    background: #0f1322;
     min-height: 100vh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
   }
 
-  .app {
+  .card {
+    background: #1a2444;
+    border-radius: 20px;
+    padding: 2.25rem 2.25rem 2rem;
     width: 100%;
-    max-width: 480px;
-  }
-
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  .header-greek {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-  }
-  .header-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.5rem;
-    color: var(--navy);
-  }
-
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 1.25rem;
-  }
-  .tab {
-    flex: 1;
-    padding: 9px 12px;
-    border: 1.5px solid #ccc;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    background: #fff;
-    color: #555;
-    transition: all .2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .tab.active {
-    background: var(--navy);
-    color: #fff;
-    border-color: var(--navy);
-  }
-
-  /* Card Preview */
-  .card-preview {
-    background: var(--navy);
-    border-radius: 18px;
-    padding: 2rem;
-    margin-bottom: 1.25rem;
+    max-width: 460px;
     position: relative;
     overflow: hidden;
-    min-height: 230px;
   }
-  .card-preview::before {
+
+  .card::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    border: 1px solid rgba(201,168,76,0.2);
+    top: -50px; right: -50px;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(201,168,76,0.15);
     border-radius: 50%;
+    pointer-events: none;
   }
-  .card-preview::after {
+  .card::after {
     content: '';
     position: absolute;
-    bottom: -60px; left: -30px;
-    width: 200px; height: 200px;
-    border: 1px solid rgba(201,168,76,0.1);
+    bottom: -70px; left: -40px;
+    width: 240px; height: 240px;
+    border: 1px solid rgba(201,168,76,0.08);
     border-radius: 50%;
+    pointer-events: none;
   }
-  .card-greek {
+
+  .greek {
     font-size: 10px;
     letter-spacing: 3px;
-    color: var(--gold);
+    color: #C9A84C;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
   }
-  .card-name {
+
+  .name {
     font-family: 'DM Serif Display', serif;
-    font-size: 2rem;
+    font-size: 2.1rem;
     color: #fff;
     line-height: 1.1;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.3rem;
   }
-  .card-role {
+
+  .role {
     font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 1.4rem;
+    color: rgba(255,255,255,0.5);
     font-weight: 300;
+    margin-bottom: 1.4rem;
   }
-  .card-divider {
+
+  .divider {
     width: 32px;
     height: 1.5px;
-    background: var(--gold);
-    margin-bottom: 1.1rem;
+    background: #C9A84C;
+    margin-bottom: 1.2rem;
   }
-  .card-details {
+
+  .details {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
+    margin-bottom: 2rem;
   }
-  .card-detail {
+
+  .detail {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
+    gap: 9px;
+    font-size: 13px;
     color: rgba(255,255,255,0.75);
+    text-decoration: none;
   }
-  .card-detail svg {
+  .detail:hover { color: #fff; }
+
+  .detail svg {
     width: 14px; height: 14px;
     flex-shrink: 0;
+    opacity: 0.7;
   }
-  .card-bottom {
+
+  .bottom {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-top: 1.5rem;
   }
-  .card-chapter {
+
+  .chapter {
     font-size: 10px;
-    color: rgba(201,168,76,0.65);
+    color: rgba(201,168,76,0.6);
     font-weight: 500;
     letter-spacing: 1px;
-  }
-  .qr-mini {
-    width: 52px; height: 52px;
-    background: #fff;
-    border-radius: 6px;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Forms */
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  .form-section { display: flex; flex-direction: column; gap: 12px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .field-group { display: flex; flex-direction: column; gap: 5px; }
-  .field-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: #666;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  .field-group input,
-  .field-group select,
-  .field-group textarea {
-    padding: 9px 11px;
-    border: 1px solid #d0cecc;
-    border-radius: 8px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    background: #fff;
-    color: #1a1a1a;
-    width: 100%;
-    outline: none;
-    transition: border .15s;
-  }
-  .field-group input:focus,
-  .field-group textarea:focus {
-    border-color: var(--navy);
-  }
-  .field-group textarea { resize: vertical; min-height: 70px; }
-
-  .btns { display: flex; gap: 10px; margin-top: 4px; }
-  .btn-primary {
-    flex: 1;
-    padding: 11px;
-    background: var(--navy);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: opacity .2s;
-  }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-secondary {
-    padding: 11px 16px;
-    background: #fff;
-    color: #333;
-    border: 1px solid #d0cecc;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background .2s;
-  }
-  .btn-secondary:hover { background: #f5f3ee; }
-  .btn-full { width: 100%; }
-
-  /* QR Section */
-  .qr-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .qr-wrapper {
-    background: #fff;
-    border: 1px solid #d0cecc;
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .qr-label {
-    font-size: 12px;
-    color: #777;
-    text-align: center;
-    max-width: 200px;
-    line-height: 1.5;
-  }
-  .qr-url-input {
-    width: 100%;
-    padding: 9px 11px;
-    border: 1px solid #d0cecc;
-    border-radius: 8px;
-    font-size: 12px;
-    font-family: monospace;
-    background: #f5f3ee;
-    color: #1a1a1a;
-    outline: none;
   }
 
-  /* Tip box */
-  .tip-box {
-    background: #fff;
-    border: 1px solid #e0ddd7;
-    border-radius: 8px;
-    padding: 0.85rem 1rem;
-    font-size: 12px;
-    color: #666;
-    line-height: 1.65;
-    width: 100%;
+  .logo {
+    width: 58px; height: 58px;
+    flex-shrink: 0;
   }
-  .tip-box strong { color: #333; font-weight: 500; }
-
-  .hidden { display: none !important; }
-
-  #qr-canvas { border-radius: 6px; display: block; }
 </style>
 </head>
 <body>
-<div class="app">
 
-  <div class="header">
-    <div class="header-greek">Alpha Kappa Psi · University of Washington</div>
-    <div class="header-title">Spring Rush Card</div>
+<div class="card">
+  <div class="greek">Alpha Kappa Psi · Spring Rush</div>
+  <div class="name">Marqus Kaito Pilapil</div>
+  <div class="role">2028 &amp; Computer Science</div>
+  <div class="divider"></div>
+  <div class="details">
+    <a class="detail" href="mailto:mpilapil@uw.edu">
+      <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M1 4l6 4 6-4" stroke="rgba(255,255,255,0.8)" stroke-width="1"/></svg>
+      mpilapil@uw.edu
+    </a>
+    <a class="detail" href="tel:2532587438">
+      <svg viewBox="0 0 14 14" fill="none"><rect x="3" y="1" width="8" height="12" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><circle cx="7" cy="10.5" r="0.75" fill="rgba(255,255,255,0.8)"/></svg>
+      253-258-7438
+    </a>
+    <a class="detail" href="https://www.linkedin.com/in/marqus-kaito-pilapil-a94139265" target="_blank">
+      <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M3.5 6v4.5M3.5 4v.5M6 10.5V8c0-1 .5-2 2-2s2 1 2 2v2.5" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+      www.linkedin.com/in/marqus-kaito-pilapil-a94139265
+    </a>
+    <a class="detail" href="https://instagram.com/bbg.mqus" target="_blank">
+      <svg viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="3" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><circle cx="7" cy="7" r="2.5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><circle cx="10.5" cy="3.5" r="0.5" fill="rgba(255,255,255,0.8)"/></svg>
+      @bbg.mqus
+    </a>
   </div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('edit')">Edit card</button>
-    <button class="tab" onclick="switchTab('preview')">Preview</button>
-    <button class="tab" onclick="switchTab('qr')">QR code</button>
+  <div class="bottom">
+    <div class="chapter">University of Washington</div>
+    <svg class="logo" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer ring -->
+      <circle cx="29" cy="29" r="27" fill="none" stroke="#C9A84C" stroke-width="1"/>
+      <!-- Sun rays (Filipino sun) -->
+      <g stroke="#C9A84C" stroke-width="1" stroke-linecap="round">
+        <line x1="29" y1="5"  x2="29" y2="11"/>
+        <line x1="29" y1="47" x2="29" y2="53"/>
+        <line x1="5"  y1="29" x2="11" y2="29"/>
+        <line x1="47" y1="29" x2="53" y2="29"/>
+        <line x1="12.1" y1="12.1" x2="16.3" y2="16.3"/>
+        <line x1="41.7" y1="41.7" x2="45.9" y2="45.9"/>
+        <line x1="45.9" y1="12.1" x2="41.7" y2="16.3"/>
+        <line x1="16.3" y1="41.7" x2="12.1" y2="45.9"/>
+      </g>
+      <!-- Cherry blossom petals (Japanese) -->
+      <g fill="#C9A84C" opacity="0.85">
+        <ellipse cx="29" cy="20" rx="3.2" ry="5" transform="rotate(0 29 29)"/>
+        <ellipse cx="29" cy="20" rx="3.2" ry="5" transform="rotate(72 29 29)"/>
+        <ellipse cx="29" cy="20" rx="3.2" ry="5" transform="rotate(144 29 29)"/>
+        <ellipse cx="29" cy="20" rx="3.2" ry="5" transform="rotate(216 29 29)"/>
+        <ellipse cx="29" cy="20" rx="3.2" ry="5" transform="rotate(288 29 29)"/>
+      </g>
+      <!-- Center circle -->
+      <circle cx="29" cy="29" r="4" fill="#C9A84C"/>
+      <circle cx="29" cy="29" r="2" fill="#1a2444"/>
+    </svg>
   </div>
-
-  <!-- EDIT PANEL -->
-  <div id="panel-edit" class="panel active">
-    <div class="form-section">
-      <div class="form-row">
-        <div class="field-group">
-          <span class="field-label">First name</span>
-          <input type="text" id="fname" placeholder="Alex" oninput="updateCard()">
-        </div>
-        <div class="field-group">
-          <span class="field-label">Last name</span>
-          <input type="text" id="lname" placeholder="Chen" oninput="updateCard()">
-        </div>
-      </div>
-      <div class="field-group">
-        <span class="field-label">Year &amp; Major</span>
-        <input type="text" id="major" placeholder="Junior · Computer Science" oninput="updateCard()">
-      </div>
-      <div class="field-group">
-        <span class="field-label">Email</span>
-        <input type="email" id="email" placeholder="uwnetid@uw.edu" oninput="updateCard()">
-      </div>
-      <div class="field-group">
-        <span class="field-label">Phone</span>
-        <input type="tel" id="phone" placeholder="(206) 555-0100" oninput="updateCard()">
-      </div>
-      <div class="field-group">
-        <span class="field-label">LinkedIn (optional)</span>
-        <input type="text" id="linkedin" placeholder="linkedin.com/in/yourname" oninput="updateCard()">
-      </div>
-      <div class="field-group">
-        <span class="field-label">Instagram (optional)</span>
-        <input type="text" id="instagram" placeholder="@yourhandle" oninput="updateCard()">
-      </div>
-      <div class="btns">
-        <button class="btn-primary" onclick="switchTab('preview')">Preview card →</button>
-        <button class="btn-secondary" onclick="switchTab('qr')">QR code</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PREVIEW PANEL -->
-  <div id="panel-preview" class="panel">
-    <div class="card-preview">
-      <div class="card-greek">Alpha Kappa Psi · Spring Rush</div>
-      <div class="card-name" id="preview-name">Your Name</div>
-      <div class="card-role" id="preview-major">Year · Major</div>
-      <div class="card-divider"></div>
-      <div class="card-details">
-        <div class="card-detail" id="row-email">
-          <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1"/><path d="M1 4l6 4 6-4" stroke="rgba(255,255,255,0.7)" stroke-width="1"/></svg>
-          <span id="preview-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1d4dcd0d8ddf1c4c69fd4d5c4">[email&#160;protected]</a></span>
-        </div>
-        <div class="card-detail" id="row-phone">
-          <svg viewBox="0 0 14 14" fill="none"><rect x="3" y="1" width="8" height="12" rx="2" stroke="rgba(255,255,255,0.7)" stroke-width="1"/><circle cx="7" cy="10.5" r="0.75" fill="rgba(255,255,255,0.7)"/></svg>
-          <span id="preview-phone">(206) 555-0100</span>
-        </div>
-        <div class="card-detail hidden" id="row-linkedin">
-          <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="rgba(255,255,255,0.7)" stroke-width="1"/><path d="M3.5 6v4.5M3.5 4v.5M6 10.5V8c0-1 .5-2 2-2s2 1 2 2v2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1" stroke-linecap="round"/></svg>
-          <span id="preview-linkedin"></span>
-        </div>
-        <div class="card-detail hidden" id="row-insta">
-          <svg viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1"/><circle cx="7" cy="7" r="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1"/><circle cx="10.5" cy="3.5" r="0.5" fill="rgba(255,255,255,0.7)"/></svg>
-          <span id="preview-insta"></span>
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-chapter">University of Washington</div>
-        <div class="qr-mini">
-          <canvas id="mini-qr" width="44" height="44"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="tip-box" style="margin-bottom:12px">
-      <strong>How to share:</strong> Host this page on <strong>Carrd.co</strong>, <strong>GitHub Pages</strong>, or a public <strong>Notion</strong> link. Then generate a QR code to that URL in the QR tab and show or print it at rush events.
-    </div>
-    <button class="btn-secondary btn-full" onclick="switchTab('edit')">← Edit info</button>
-  </div>
-
-  <!-- QR PANEL -->
-  <div id="panel-qr" class="panel">
-    <div class="qr-section">
-      <div class="field-group" style="width:100%">
-        <span class="field-label">URL to encode</span>
-        <input class="qr-url-input" type="url" id="qr-url" placeholder="https://yourname.carrd.co" oninput="generateQR()">
-      </div>
-      <div class="qr-wrapper">
-        <canvas id="qr-canvas" width="200" height="200"></canvas>
-        <div class="qr-label" id="qr-hint">Enter a URL above to generate your QR code</div>
-      </div>
-      <button class="btn-primary btn-full" id="save-btn" onclick="saveQR()" style="display:none">Save QR code image</button>
-      <div class="tip-box">
-        <strong>Free hosting ideas:</strong><br>
-        • <strong>Carrd.co</strong> — drag-and-drop, free, live in 5 min<br>
-        • <strong>GitHub Pages</strong> — upload this HTML file, free<br>
-        • <strong>Notion</strong> — paste info into a page, share publicly<br><br>
-        Once you have your URL, paste it above and save the QR image. Print it on a small card or just show it on your phone.
-      </div>
-    </div>
-  </div>
-
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach((el, i) => {
-    const names = ['edit', 'preview', 'qr'];
-    el.classList.toggle('active', names[i] === t);
-  });
-  ['edit', 'preview', 'qr'].forEach(id => {
-    document.getElementById('panel-' + id).classList.toggle('active', id === t);
-  });
-  if (t === 'preview') { updateCard(); drawMiniQR(); }
-  if (t === 'qr') { generateQR(); }
-}
 
-function updateCard() {
-  const fname = document.getElementById('fname').value || 'Your';
-  const lname = document.getElementById('lname').value || 'Name';
-  const major = document.getElementById('major').value || 'Year · Major';
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const linkedin = document.getElementById('linkedin').value;
-  const insta = document.getElementById('instagram').value;
-
-  document.getElementById('preview-name').textContent = fname + ' ' + lname;
-  document.getElementById('preview-major').textContent = major;
-  document.getElementById('preview-email').textContent = email || 'email@uw.edu';
-  document.getElementById('preview-phone').textContent = phone || 'your phone';
-
-  toggle('row-linkedin', !!linkedin);
-  if (linkedin) document.getElementById('preview-linkedin').textContent = linkedin;
-  toggle('row-insta', !!insta);
-  if (insta) document.getElementById('preview-insta').textContent = insta;
-}
-
-function toggle(id, show) {
-  document.getElementById(id).classList.toggle('hidden', !show);
-}
-
-function drawMiniQR() {
-  const canvas = document.getElementById('mini-qr');
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#1a2444';
-  ctx.fillRect(0, 0, 44, 44);
-  const s = 3, o = 4;
-  const pat = [
-    [1,1,1,1,1,1,1],[1,0,0,0,0,0,1],[1,0,1,1,1,0,1],
-    [1,0,1,1,1,0,1],[1,0,1,1,1,0,1],[1,0,0,0,0,0,1],[1,1,1,1,1,1,1]
-  ];
-  ctx.fillStyle = '#C9A84C';
-  pat.forEach((row, r) => row.forEach((cell, c) => {
-    if (cell) ctx.fillRect(o + c * s, o + r * s, s - 0.5, s - 0.5);
-  }));
-  for (let i = 0; i < 3; i++)
-    for (let j = 0; j < 3; j++)
-      if (Math.random() > 0.5) ctx.fillRect(o + 21 + j * s, o + i * s, s - 0.5, s - 0.5);
-  for (let i = 0; i < 3; i++)
-    for (let j = 0; j < 4; j++)
-      if (Math.random() > 0.4) ctx.fillRect(o + j * s, o + 21 + i * s, s - 0.5, s - 0.5);
-}
-
-let qrInstance = null;
-function generateQR() {
-  const url = document.getElementById('qr-url').value.trim();
-  const canvas = document.getElementById('qr-canvas');
-  const ctx = canvas.getContext('2d');
-  const hint = document.getElementById('qr-hint');
-  const saveBtn = document.getElementById('save-btn');
-  ctx.clearRect(0, 0, 200, 200);
-  saveBtn.style.display = 'none';
-
-  if (!url) { hint.textContent = 'Enter a URL above to generate your QR code'; return; }
-  if (!url.startsWith('http')) { hint.textContent = 'Please enter a full URL starting with https://'; return; }
-
-  try {
-    const container = document.createElement('div');
-    if (qrInstance) { qrInstance.clear(); qrInstance = null; }
-    qrInstance = new QRCode(container, {
-      text: url, width: 192, height: 192,
-      colorDark: '#1a2444', colorLight: '#faf8f3',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-    setTimeout(() => {
-      const img = container.querySelector('img') || container.querySelector('canvas');
-      if (img) {
-        const src = img.tagName === 'IMG' ? img.src : img.toDataURL();
-        const i = new Image();
-        i.onload = () => { ctx.drawImage(i, 4, 4, 192, 192); };
-        i.src = src;
-        hint.textContent = 'Right-click or tap the button below to save';
-        saveBtn.style.display = 'block';
-      }
-    }, 250);
-  } catch(e) { hint.textContent = 'Could not generate QR — check the URL'; }
-}
+</body>
+</html>
